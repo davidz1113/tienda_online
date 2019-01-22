@@ -39,6 +39,9 @@ import {
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './Login/login.component';
+import { RouterModule } from '@angular/router';
+import { AppRoutes } from './app.routing';
 
 @NgModule({
   exports: [
@@ -80,9 +83,11 @@ export class MaterialModule {}
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
+    RouterModule.forRoot(AppRoutes),
     BrowserModule,
     MaterialModule,
     FormsModule,
