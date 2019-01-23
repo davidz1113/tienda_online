@@ -11,6 +11,11 @@ export class LoginComponent {
     identificacionForm: FormGroup;
     //para validar que se presiono el boton de iniciarsesion
     enviado = false;
+    //progreso de iniciar sesion
+    logeandose = false;
+    //mensaje de error
+    msjerror='';
+
     constructor(private identForm: FormBuilder, ) {
         this.validarFormulario();
     }
@@ -29,5 +34,8 @@ export class LoginComponent {
         if(this.identificacionForm.invalid){
             return;
         }
+        this.logeandose = true;
+
+
     }
 }
