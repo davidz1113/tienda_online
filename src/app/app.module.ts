@@ -42,6 +42,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './Login/login.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app.routing';
+import { LayoutComponent } from './principal/layout/layout.component';
+import { HeaderComponent } from './principal/header/header.component';
 
 @NgModule({
   exports: [
@@ -76,13 +78,14 @@ import { AppRoutes } from './app.routing';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-  ]
+  ],
+  declarations: []
 })
 export class MaterialModule {}
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,LayoutComponent, HeaderComponent
   ],
   imports: [
     BrowserAnimationsModule,
