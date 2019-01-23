@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
 import {
@@ -79,14 +79,13 @@ import { AppRoutes } from './app.routing';
   ]
 })
 export class MaterialModule {}
-
-
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),
     BrowserModule,
     MaterialModule,
