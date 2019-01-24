@@ -1,4 +1,30 @@
-<app-header></app-header>
-<div class="container">
-  layout works
+<div class="wrapper wrapper-full-page" style="background-image: url('./assets/main-fondo.jpg'); background-size: cover; background-position: top center; background-repeat:no-repeat;">
+
+  <div class="container">
+    <app-header></app-header>
+    <div class="jumbotron">
+      <div class="row">
+
+        <h1 class="col-sm-8">Catálogo de productos</h1>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="producto">¿Qué estás buscando?</label>
+            <input type="text" class="form-control" id="producto" placeholder="Buscar producto">
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="pane-scroll">
+
+        <div class="row">
+          <div *ngFor="let producto of productos" class="col-md-4 mb-2" >
+            <app-card-productos [producto]='producto'></app-card-productos>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { UsuarioServices } from "../servicios/usuario.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { redirijirSiEstaIdentificado } from "../servicios/globales";
 
 @Component({
     selector: 'app-login',
@@ -19,26 +20,19 @@ export class LoginComponent implements OnInit {
     //mensaje de error
     msjerror = '';
     ngOnInit() {
-        this.redirijirSiEstaIdentificado();
+        redirijirSiEstaIdentificado(this._router);
+        this.logOut();
+
     }
 
-    constructor(private identForm: FormBuilder, private _userService: UsuarioServices, private _router: Router) {
+    constructor(private identForm: FormBuilder, 
+        private _userService: UsuarioServices, private _router: Router,   
+         private _route: ActivatedRoute,
+        ) {
         this.validarFormulario();
     }
 
-    /**
-     * MEtodo que redirije al usuario si este ya se ha registrado
-     */
-    redirijirSiEstaIdentificado() {
-        const usuario = JSON.parse(localStorage.getItem('usuario'));
-        if (usuario != null) {
-            this._router.navigate(['principal']);
-            // console.log("redirijir");
-        } else {
-            this._router.navigate(['login']);
-        }
-    }
-
+    
     //Metodo para validar los campos de los formularios
     validarFormulario(): void {
         this.identificacionForm = this.identForm.group({
@@ -77,5 +71,17 @@ export class LoginComponent implements OnInit {
             }
         );
 
+    }
+
+    logOut() {
+        this._route.params.forEach((params: Params) => {
+            let logout = +params['id'];
+            if (logout == 1) {
+                localStorage.removeItem('usuario');
+                //console.log(this.msg);
+                this._router.navigate(["/login"]);
+                //window.location.href = '/' + GLOBAL.urlBase + '/login';
+            }
+        });
     }
 }

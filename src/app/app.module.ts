@@ -35,7 +35,8 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
-  MatDatepickerModule
+  MatDatepickerModule,
+  MatBadgeModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -44,6 +45,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app.routing';
 import { LayoutComponent } from './principal/layout/layout.component';
 import { HeaderComponent } from './principal/header/header.component';
+import { CardProductosComponent } from './principal/card-productos/card-productos.component';
 
 @NgModule({
   exports: [
@@ -78,6 +80,7 @@ import { HeaderComponent } from './principal/header/header.component';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatBadgeModule
   ],
   declarations: []
 })
@@ -85,7 +88,10 @@ export class MaterialModule {}
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,LayoutComponent, HeaderComponent
+    CardProductosComponent,
+    LoginComponent,
+    LayoutComponent,
+     HeaderComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -96,7 +102,6 @@ export class MaterialModule {}
     ReactiveFormsModule,
     HttpClientModule,
     HttpModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

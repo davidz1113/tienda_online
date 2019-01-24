@@ -1,0 +1,9 @@
+.jumbotron {
+    padding: 2rem 1rem;
+}
+
+.pane-scroll{
+    height: 330px;
+    overflow-y:auto;
+    -webkit-overflow-scrolling: touch;
+}

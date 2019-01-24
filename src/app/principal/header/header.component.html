@@ -1,3 +1,24 @@
-<p>
-  header works!
-</p>
+<nav class="navbar navbar-light bg-light mb-5">
+  <a class="navbar-brand" href="#">La Bodega, ¡Bienvenido! <span class="badge badge-dark">{{usuario.nombre}}</span> </a>
+
+  <div class="navbar-expand ml-auto navbar-nav">
+    <div class="navbar-nav">
+      <button mat-icon-button matTooltip="Principal" matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip"
+        class="example-button">
+        <i class="material-icons text-black">dashboard</i>
+      </button>
+      <button mat-icon-button matTooltip="Carrito de compras" [matBadgeHidden]='notificacion==0' [matBadge]="notificacion" matBadgePosition="below" matBadgeColor="accent"
+        matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip" class="example-button">
+        <i class="material-icons text-black">shopping_cart</i>
+      </button>
+      <button mat-icon-button matTooltip="Inbox" matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip"
+        class="example-button">
+        <i class="material-icons text-black">inbox</i>
+      </button>
+       <button [routerLink]="['/login', 1]" mat-icon-button matTooltip="Cerrar sesión" matTooltipClass="example-tooltip-red"
+        aria-label="Button that shows a red tooltip" class="example-button">
+        <i class="material-icons text-black">undo</i>
+      </button>
+    </div>
+  </div>
+</nav>
