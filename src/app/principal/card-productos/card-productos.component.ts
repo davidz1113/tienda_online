@@ -12,6 +12,7 @@ export class CardProductosComponent implements OnInit {
     @Input() producto: ProductoInterface;
     bloqueo = false;
     tope: number = 0;
+    unidadesdispo: number;
     constructor(private _principalService: PrincipalServices) {
     }
 
@@ -19,6 +20,7 @@ export class CardProductosComponent implements OnInit {
 
         this.tope += this.producto.unidades;
         this.producto.unidades -= 1;
+
     }
 
     /**
@@ -28,24 +30,33 @@ export class CardProductosComponent implements OnInit {
      */
     agregarCarrito(numero) {
         if (numero > 0) {
-            this.producto.bloqueo = true;
-            this._principalService.aumentarNumero();
-            this._principalService.guardarProductosCompra(this.producto);
+            this.producto.bloqueo = false;
+
+            this.producto.unidades -=  numero;
+            let nuevoProducto: ProductoInterface = {
+                idproducto: this.producto.idproducto,
+                nombre: this.producto.nombre,
+                precio: this.producto.precio,
+                unidades: numero,
+                urlimagen: this.producto.urlimagen
+            }
+            // this._principalService.aumentarNumero();
+            this._principalService.guardarProductosCompra(nuevoProducto);
         }
     }
 
-    /**
-     * 
-     * @param numero numero del input
-     */
-    anterior: number = 1;
-    cambiarUnidades(numero) {
-        if (parseFloat(numero) > this.anterior) {
-            this.producto.unidades--;
-        } else {
-            this.producto.unidades++;
-        }
-        this.anterior = numero;
-    }
+    // /**
+    //  * 
+    //  * @param numero numero del input
+    //  */
+    // anterior: number = 1;
+    // cambiarUnidades(numero) {
+    //     if (parseFloat(numero) > this.anterior) {
+    //         this.producto.unidades--;
+    //     } else {
+    //         this.producto.unidades++;
+    //     }
+    //     this.anterior = numero;
+    // }
 
 }

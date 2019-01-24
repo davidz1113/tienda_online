@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { PrincipalServices } from '../../servicios/principal.service';
 import { Observable, Subscription } from 'rxjs';
 
@@ -12,6 +12,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   usuario: any = null;
   numero$: Observable<number>;
   numeroSubscribe$: Subscription;
+  @Output() mostrarModalCarrito = new EventEmitter();
+
   constructor(private _principalService: PrincipalServices) { }
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   enviarProductosPrincipal() {
-    console.log(this._principalService.obtenerProductosCompra());
+    this.mostrarModalCarrito.emit({ prodCompra: this._principalService.obtenerProductosCompra() });
   }
 
 }

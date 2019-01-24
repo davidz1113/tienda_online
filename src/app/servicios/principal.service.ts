@@ -47,7 +47,8 @@ export class PrincipalServices {
      * de productosCompra
      */
     guardarProductosCompra(producto: ProductoInterface) {
-        this.productosCompra.push(producto);
+            this.productosCompra.push(producto);
+            this.aumentarNumero();
     }
 
     /**

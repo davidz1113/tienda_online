@@ -43,6 +43,16 @@ export class LayoutComponent implements OnInit {
 
   /**
    * 
+   * @param event objeto con los productos del carrito
+   */
+  mostrarModalCarrito(event){
+    console.log('aqui');
+    console.log(event);
+    
+  }
+
+  /**
+   * 
    * @param filtroProd palabra a buscar en productos
    */
   buscarProducto(filtroProd: string) {
