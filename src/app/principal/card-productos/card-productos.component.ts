@@ -8,9 +8,10 @@ import { PrincipalServices } from "../../servicios/principal.service";
     styleUrls: ['./card-productos.component.scss'],
 })
 export class CardProductosComponent implements OnInit {
-    @Input()producto;
+    @Input() producto;
+    bloqueo=false;
 
-    constructor(private _principalService: PrincipalServices){
+    constructor(private _principalService: PrincipalServices) {
 
     }
 
@@ -18,8 +19,12 @@ export class CardProductosComponent implements OnInit {
 
     }
 
-    agregarCarrito(){
-        this._principalService.aumentarNumero();
-      }
+    agregarCarrito(numero) {
+        console.log(numero);
+        if (numero > 0) {
+            this.bloqueo=true;
+            this._principalService.aumentarNumero();
+        }
+    }
 
 }
