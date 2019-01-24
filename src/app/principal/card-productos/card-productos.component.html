@@ -12,10 +12,10 @@
             <div class="col-sm-6">
                 <div class="row">
                     <div class="col-lg-7">
-                        <button [disabled]='bloqueo' class="btn btn-warning" (click)="agregarCarrito(numero.value)">Añadir</button>
+                        <button [disabled]='producto.bloqueo' class="btn btn-warning" (click)="agregarCarrito(numero.value)">Añadir</button>
                     </div>
                     <!-- <div class=""> -->
-                        <input #numero value="1" min="1" max="100" class="col-lg-5" style="padding-right: 0px" type="number" id="producto">
+                        <input  [disabled]='producto.bloqueo' #numero value="1" min="1" [max]="tope" class="col-lg-5" style="padding-right: 0px" type="number" id="producto" (input)='cambiarUnidades(numero.value)' >
                     <!-- </div> -->
                 </div>
 

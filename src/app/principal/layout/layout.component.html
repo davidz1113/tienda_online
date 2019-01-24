@@ -9,7 +9,7 @@
         <div class="col-sm-4">
           <div class="form-group">
             <label for="producto">¿Qué estás buscando?</label>
-            <input type="text" class="form-control" id="producto" placeholder="Buscar producto">
+            <input type="text" class="form-control" id="producto" placeholder="Buscar producto" #filtroProd (input)='buscarProducto(filtroProd.value)' >
           </div>
         </div>
 
@@ -19,7 +19,7 @@
       <div class="pane-scroll">
 
         <div class="row">
-          <div *ngFor="let producto of productos" class="col-md-4 mb-2" >
+          <div *ngFor="let producto of newProductos" class="col-md-4 mb-2" >
             <app-card-productos [producto]='producto'></app-card-productos>
           </div>
         </div>

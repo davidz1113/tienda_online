@@ -3,7 +3,7 @@
 }
 
 .pane-scroll{
-    height: 330px;
+    max-height: 30rem;
     overflow-y:auto;
     -webkit-overflow-scrolling: touch;
 }

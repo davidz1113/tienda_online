@@ -15,3 +15,12 @@ export function redirijirSiEstaIdentificado(_router) {
         _router.navigate(['login']);
     }
 }
+
+export interface ProductoInterface {
+    idproducto: number,
+    nombre: String,
+    precio: number,
+    unidades: number,
+    urlimagen: String,
+    bloqueo?: boolean
+}

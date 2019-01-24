@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { redirijirSiEstaIdentificado } from '../../servicios/globales';
+import { redirijirSiEstaIdentificado, ProductoInterface } from '../../servicios/globales';
 import { Router } from '@angular/router';
 import { PrincipalServices } from '../../servicios/principal.service';
 
@@ -11,9 +11,11 @@ import { PrincipalServices } from '../../servicios/principal.service';
 })
 export class LayoutComponent implements OnInit {
 
-  productos: any[] = [];
+  productos: ProductoInterface[] = [];
+  newProductos: ProductoInterface[] = [];
+  constructor(private _router: Router, private _principalService: PrincipalServices) {
 
-  constructor(private _router: Router, private _principalService: PrincipalServices) { }
+  }
 
 
 
@@ -25,19 +27,28 @@ export class LayoutComponent implements OnInit {
   consultarProductos() {
     this._principalService.consultarProductos().subscribe(
       response => {
-        if(response.estado==1){
+        if (response.estado == 1) {
           this.productos = response.productos;
-        }else{
+          this.newProductos = this.productos.slice();//copia de los productos originales
+        } else {
           console.log(response);
         }
-        
+
       },
       error => {
-
+        console.log(error);
       }
     );
   }
 
-
+  /**
+   * 
+   * @param filtroProd palabra a buscar en productos
+   */
+  buscarProducto(filtroProd: string) {
+    console.log(filtroProd);
+    if (this.productos.length == 0) return;
+    this.newProductos = this.productos.filter(producto => producto.nombre.toString().indexOf(filtroProd) != -1);
+  }
 
 }

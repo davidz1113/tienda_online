@@ -7,7 +7,7 @@
         class="example-button">
         <i class="material-icons text-black">dashboard</i>
       </button>
-      <button mat-icon-button matTooltip="Carrito de compras" [matBadgeHidden]='notificacion==0' [matBadge]="notificacion" matBadgePosition="below" matBadgeColor="accent"
+      <button mat-icon-button matTooltip="Carrito de compras" (click)="enviarProductosPrincipal()" [matBadgeHidden]='notificacion==0' [matBadge]="notificacion" matBadgePosition="below" matBadgeColor="accent"
         matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip" class="example-button">
         <i class="material-icons text-black">shopping_cart</i>
       </button>
