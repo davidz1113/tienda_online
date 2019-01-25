@@ -1,7 +1,7 @@
 <div class="wrapper wrapper-full-page" style="background-image: url('./assets/main-fondo.jpg'); background-size: cover; background-position: top center; background-repeat:no-repeat;">
 
   <div class="container">
-    <app-header (mostrarModalCarrito)='mostrarModalCarrito($event)' ></app-header>
+    <app-header (mostrarModalCarrito)='mostrarModalCarrito($event)'></app-header>
     <div class="jumbotron">
       <div class="row">
 
@@ -9,17 +9,23 @@
         <div class="col-sm-4">
           <div class="form-group">
             <label for="producto">¿Qué estás buscando?</label>
-            <input type="text" class="form-control" id="producto" placeholder="Buscar producto" #filtroProd (input)='buscarProducto(filtroProd.value)' >
+            <input type="text" class="form-control" id="producto" placeholder="Buscar producto" #filtroProd (input)='buscarProducto(filtroProd.value)'>
           </div>
         </div>
 
       </div>
-
+      <div style="padding: 1rem">
+        <div [class]="class" role="alert" *ngIf="msjerror">
+          <strong> {{estado==1?'Éxito':'Error'}}</strong> {{msjerror}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="msjerror=''">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
 
       <div class="pane-scroll">
-
         <div class="row">
-          <div *ngFor="let producto of newProductos" class="col-md-4 mb-2" >
+          <div *ngFor="let producto of newProductos" class="col-md-4 mb-2">
             <app-card-productos [producto]='producto'></app-card-productos>
           </div>
         </div>
@@ -27,4 +33,42 @@
     </div>
   </div>
 
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Carrito de compras</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="list-group pane-scroll">
+          <div *ngFor="let prod of prodCompras" class="list-group-item list-group-item-action">
+            <img style="height: 50px; width: 50px" src="{{prod.urlimagen}}" class="rounded float-left mr-1" alt="">
+            <p style="margin-bottom: 0px"> {{prod.nombre}} </p>
+            <p>Unidades: {{prod.numero}} </p>
+            <p style="display: block"> subtotal: <span class="badge badge-danger">${{prod.numero*prod.precio}}</span></p>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal-footer"> -->
+
+      <div style="border-top: 1px solid #00000022">
+        <h5 style="padding: 1rem; padding-bottom: 0px">Total:$ <span class="badge badge-danger">{{total}}</span></h5>
+      </div>
+      <mat-progress-bar mode="indeterminate" class="mt-2 mb-4" [hidden]="!comprando"></mat-progress-bar>
+
+      <div style="display: flex;justify-content: flex-end; padding: 1rem">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="comprarProductos()">Comprar</button>
+      </div>
+      <!-- </div> -->
+    </div>
+  </div>
 </div>

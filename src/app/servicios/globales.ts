@@ -23,4 +23,5 @@ export interface ProductoInterface {
     unidades: number,
     urlimagen: String,
     bloqueo?: boolean
+    numero?:number
 }

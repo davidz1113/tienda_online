@@ -29,19 +29,12 @@ export class CardProductosComponent implements OnInit {
      * metodo que enviar los productos al header
      */
     agregarCarrito(numero) {
-        if (numero > 0) {
+        if (numero > 0 && parseFloat(numero) <= this.tope) {
             this.producto.bloqueo = false;
 
-            this.producto.unidades -=  numero;
-            let nuevoProducto: ProductoInterface = {
-                idproducto: this.producto.idproducto,
-                nombre: this.producto.nombre,
-                precio: this.producto.precio,
-                unidades: numero,
-                urlimagen: this.producto.urlimagen
-            }
-            // this._principalService.aumentarNumero();
-            this._principalService.guardarProductosCompra(nuevoProducto);
+            this.producto.unidades = this.tope - numero;
+            this.producto.numero = numero;
+            this._principalService.guardarProductosCompra(this.producto);
         }
     }
 

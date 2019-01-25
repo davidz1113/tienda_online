@@ -27,8 +27,12 @@ export class PrincipalServices {
     /**
      * aumenta el numero en el carrito de supermercado
      */
-    aumentarNumero() {
-        this.numero++;
+    aumentarNumero(numero?) {
+        if(numero){
+            this.numero=0;
+        }else{
+            this.numero++;
+        }
         this.numero$.next(this.numero);
     }
 
@@ -47,8 +51,29 @@ export class PrincipalServices {
      * de productosCompra
      */
     guardarProductosCompra(producto: ProductoInterface) {
-            this.productosCompra.push(producto);
+        // console.log(producto);
+        if (this.productosCompra.length != 0) {
+            let prod = this.productosCompra.filter(p => p.idproducto == producto.idproducto)[0];
+            if (prod) {
+                console.log(prod);
+                prod.unidades = producto.unidades;
+                prod.numero = producto.numero;
+            } else {
+                this.aumentarNumero();
+                this.productosCompra.push(producto);
+            }
+            // this.productosCompra.push(producto);
+        } else {
             this.aumentarNumero();
+            this.productosCompra.push(producto);
+        }
+    }
+
+    /**
+     * devolver los productos a 0
+     */
+    resetProductosCompra() {
+        this.productosCompra = [];
     }
 
     /**
@@ -64,6 +89,19 @@ export class PrincipalServices {
      */
     consultarProductos() {
         return this._http.get(this.url + 'obtenerProductos.php?opcion=1', { headers: this.headers })
+            .pipe(map(res => res.json()));
+    }
+
+    /**
+     * 
+     * @param prodCompras objetos a comprar
+     * metodo que envia los objetos en forma de json para actualizar la base de datos
+     */
+    actualizarProductos(prodCompras: any) {
+
+        let params = JSON.stringify({ opcion: "1", json: prodCompras })
+
+        return this._http.post(this.url + 'obtenerProductos.php', params, { headers: this.headers })
             .pipe(map(res => res.json()));
     }
 
