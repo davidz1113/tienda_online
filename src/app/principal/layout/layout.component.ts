@@ -17,6 +17,14 @@ export class LayoutComponent implements OnInit {
   total: number = 0;
   msjerror = '';
   class = 'alert alert-warning alert-dismissible fade show';
+  seleccionado: ProductoInterface = {
+    idproducto:0,
+    nombre:'',
+    precio:0,
+    unidades:0,
+    urlimagen:''
+  };
+
   constructor(private _router: Router, private _principalService: PrincipalServices) {
 
   }
@@ -57,7 +65,7 @@ export class LayoutComponent implements OnInit {
         this.total += prod.numero * prod.precio;
       }
     );
-    $('#exampleModalLong').modal('show')
+    $('#exampleModalLong').modal('show');
   }
 
   /**
@@ -102,6 +110,15 @@ export class LayoutComponent implements OnInit {
 
       }
     );
+  }
+
+  /**
+   * 
+   * @param event objeto para mostrar detalle
+   */
+  mostrarModalDetalle(event) {
+    this.seleccionado = event.prodDetalle;
+    $('#modaldetalle').modal('show');
   }
 
 }

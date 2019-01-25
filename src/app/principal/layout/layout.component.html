@@ -26,7 +26,7 @@
       <div class="pane-scroll">
         <div class="row">
           <div *ngFor="let producto of newProductos" class="col-md-4 mb-2">
-            <app-card-productos [producto]='producto'></app-card-productos>
+            <app-card-productos [producto]='producto' (enviarProducto)='mostrarModalDetalle($event)'></app-card-productos>
           </div>
         </div>
       </div>
@@ -69,6 +69,29 @@
         <button type="button" class="btn btn-primary" (click)="comprarProductos()">Comprar</button>
       </div>
       <!-- </div> -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade"  id="modaldetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalle del producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <img [src]="seleccionado.urlimagen" class="rounded mx-auto d-block" style="height: 250px; width: 250px">
+          <h3>{{seleccionado.nombre}}</h3>
+          <h4>Precio: $<span class="badge badge-danger"> {{seleccionado.precio}} </span> </h4>
+          <h4>Unidades disponibles:  {{seleccionado.unidades}}  </h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
+      </div>
     </div>
   </div>
 </div>

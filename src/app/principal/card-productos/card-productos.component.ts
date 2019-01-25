@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 import { PrincipalServices } from "../../servicios/principal.service";
 import { ProductoInterface } from "../../servicios/globales";
@@ -13,6 +13,7 @@ export class CardProductosComponent implements OnInit {
     bloqueo = false;
     tope: number = 0;
     unidadesdispo: number;
+    @Output() enviarProducto = new EventEmitter();
     constructor(private _principalService: PrincipalServices) {
     }
 
