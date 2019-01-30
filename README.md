@@ -1,6 +1,10 @@
 # TiendaOnline
+usuario de prueba: usuario@correo.com
+contraseña: 123456
 
-![alt text](https://youmarket.000webhostapp.com/imagenesCatalogo/catalogo1.jpg "Fotos del Sistema")
+![alt text](https://youmarket.000webhostapp.com/imagenesCatalogo/catalogo2.jpg "Foto de inicio de sesión")
+
+![alt text](https://youmarket.000webhostapp.com/imagenesCatalogo/catalogo1.jpg "Foto del Catalogo")
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
 
