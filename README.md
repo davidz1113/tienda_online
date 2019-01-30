@@ -1,4 +1,4 @@
-# TiendaOnline
+# Proyecto Tienda Online
 + usuario de prueba: "usuario@correo.com"
 + contraseña: "123456"
 + [Versión en linea](https://youmarket.000webhostapp.com/tiendaOnline/)
