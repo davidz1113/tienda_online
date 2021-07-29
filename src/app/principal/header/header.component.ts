@@ -9,7 +9,6 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   notificacion = 0;
-  usuario: any = null;
   numero$: Observable<number>;
   numeroSubscribe$: Subscription;
   @Output() mostrarModalCarrito = new EventEmitter();
@@ -24,7 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       //asignacion del numero al icono de notificacion
       numero => this.notificacion = numero
     );
-    this.usuario = JSON.parse(localStorage.getItem('usuario'));
+   
   }
 
   ngOnDestroy(): void {

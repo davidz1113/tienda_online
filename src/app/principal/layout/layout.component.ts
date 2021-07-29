@@ -1,33 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { redirijirSiEstaIdentificado, ProductoInterface } from '../../servicios/globales';
-import { Router } from '@angular/router';
-import { PrincipalServices } from '../../servicios/principal.service';
+import { Component, OnInit } from "@angular/core";
+import {
+  redirijirSiEstaIdentificado,
+  ProductoInterface,
+} from "../../servicios/globales";
+import { Router } from "@angular/router";
+import { PrincipalServices } from "../../servicios/principal.service";
 // import * as $ from 'jquery'
 declare const $: any;
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css'],
-  providers: [PrincipalServices]
+  selector: "app-layout",
+  templateUrl: "./layout.component.html",
+  styleUrls: ["./layout.component.css"],
+  providers: [PrincipalServices],
 })
 export class LayoutComponent implements OnInit {
-
   productos: ProductoInterface[] = [];
   newProductos: ProductoInterface[] = [];
   total: number = 0;
-  msjerror = '';
-  class = 'alert alert-warning alert-dismissible fade show';
+  msjerror = "";
+  class = "alert alert-warning alert-dismissible fade show";
   seleccionado: ProductoInterface = {
-    idproducto:0,
-    nombre:'',
-    precio:0,
-    unidades:0,
-    urlimagen:''
+    id: 0,
+    nombre: "",
+    precio: 0,
+    unidades: 0,
+    url: "",
   };
 
-  constructor(private _router: Router, private _principalService: PrincipalServices) {
-
-  }
+  constructor(
+    private _router: Router,
+    private _principalService: PrincipalServices
+  ) {}
 
   ngOnInit() {
     redirijirSiEstaIdentificado(this._router);
@@ -36,22 +39,20 @@ export class LayoutComponent implements OnInit {
 
   consultarProductos() {
     this._principalService.consultarProductos().subscribe(
-      response => {
-        if (response.estado == 1) {
-          this.productos = response.productos;
-          this.newProductos = this.productos.slice();//copia de los productos originales
-        } else {
-          console.log(response);
-        }
+      (response: any) => {
+        if (response) {
+          this.productos = response;
+          this.newProductos = this.productos.slice(); //copia de los productos originales
+        } 
       },
-      error => {
+      (error) => {
         console.log(error);
       }
     );
   }
 
   /**
-   * 
+   *
    * @param event objeto con los productos del carrito
    */
   prodCompras: any;
@@ -59,27 +60,27 @@ export class LayoutComponent implements OnInit {
     this.prodCompras = event.prodCompra;
     this.total = 0;
     this.comprando = false;
-    this.msjerror = '';
-    this.prodCompras.map(
-      prod => {
-        this.total += prod.numero * prod.precio;
-      }
-    );
-    $('#exampleModalLong').modal('show');
+    this.msjerror = "";
+    this.prodCompras.map((prod) => {
+      this.total += prod.numero * prod.precio;
+    });
+    $("#exampleModalLong").modal("show");
   }
 
   /**
-   * 
+   *
    * @param filtroProd palabra a buscar en productos
    */
   buscarProducto(filtroProd: string) {
     console.log(filtroProd);
     if (this.productos.length == 0) return;
-    this.newProductos = this.productos.filter(producto => producto.nombre.toString().indexOf(filtroProd) != -1);
+    this.newProductos = this.productos.filter(
+      (producto) => producto.nombre.toString().indexOf(filtroProd) != -1
+    );
   }
 
   /**
-   *metodo que envia los id de los productos y las unidades  
+   *metodo que envia los id de los productos y las unidades
    */
   comprando = false;
   estado: number;
@@ -87,38 +88,36 @@ export class LayoutComponent implements OnInit {
     if (this.prodCompras.length == 0) return;
     this.comprando = true;
     this._principalService.actualizarProductos(this.prodCompras).subscribe(
-      response => {
+      (response: any) => {
         this.msjerror = response.mensaje;
         if (response.estado == 1) {
           this.estado = 1;
-          this.class = 'alert alert-success alert-dismissible fade show';
+          this.class = "alert alert-success alert-dismissible fade show";
           this.consultarProductos();
-          $('#exampleModalLong').modal('hide')
+          $("#exampleModalLong").modal("hide");
           this._principalService.resetProductosCompra();
           this._principalService.aumentarNumero(true);
         } else {
           this.estado = 2;
-          this.class = 'alert alert-warning alert-dismissible fade show';
+          this.class = "alert alert-warning alert-dismissible fade show";
         }
         this.comprando = false;
       },
-      error => {
+      (error) => {
         this.estado = 2;
         this.comprando = false;
-        this.msjerror = 'Error en el servidor';
-        this.class = 'alert alert-warning alert-dismissible fade show';
-
+        this.msjerror = "Error en el servidor";
+        this.class = "alert alert-warning alert-dismissible fade show";
       }
     );
   }
 
   /**
-   * 
+   *
    * @param event objeto para mostrar detalle
    */
   mostrarModalDetalle(event) {
     this.seleccionado = event.prodDetalle;
-    $('#modaldetalle').modal('show');
+    $("#modaldetalle").modal("show");
   }
-
 }

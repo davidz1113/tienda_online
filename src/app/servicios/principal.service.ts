@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Http, Response, Headers } from '@angular/http';
-import { map } from 'rxjs/operators';
 import { GLOBAL, ProductoInterface } from "./globales";
 import { Subject, Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class PrincipalServices {
@@ -19,9 +18,9 @@ export class PrincipalServices {
      * 
      * @param _http inyeccion de variable de conexion
      */
-    constructor(private _http: Http) {
+    constructor(private _http: HttpClient) {
         this.url = GLOBAL.url;
-        this.headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        this.headers = new HttpHeaders({ 'Content-Type': 'application/json', "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYXZpZCIsImlhdCI6MTYyMTQ4MjcwOSwiZXhwIjoxNjIxNTE4NzA5fQ.OSL9bcKOmD1iRzlK79ATT0xzpE0sW3VIzJ_8TWJeOEI" });
     }
 
     /**
@@ -53,7 +52,7 @@ export class PrincipalServices {
     guardarProductosCompra(producto: ProductoInterface) {
         // console.log(producto);
         if (this.productosCompra.length != 0) {
-            let prod = this.productosCompra.filter(p => p.idproducto == producto.idproducto)[0];
+            let prod = this.productosCompra.filter(p => p.id == producto.id)[0];
             if (prod) {
                 console.log(prod);
                 prod.unidades = producto.unidades;
@@ -88,8 +87,7 @@ export class PrincipalServices {
      * metodo para consultar productos
      */
     consultarProductos() {
-        return this._http.get(this.url + 'obtenerProductos.php?opcion=1', { headers: this.headers })
-            .pipe(map(res => res.json()));
+        return this._http.get(`${this.url}/products`, { headers: this.headers });
     }
 
     /**
@@ -98,11 +96,8 @@ export class PrincipalServices {
      * metodo que envia los objetos en forma de json para actualizar la base de datos
      */
     actualizarProductos(prodCompras: any) {
-
-        let params = JSON.stringify({ opcion: "1", json: prodCompras })
-
-        return this._http.post(this.url + 'obtenerProductos.php', params, { headers: this.headers })
-            .pipe(map(res => res.json()));
+        let params = JSON.stringify(prodCompras)
+        return this._http.put(`${this.url}/products`, params, { headers: this.headers });
     }
 
 }

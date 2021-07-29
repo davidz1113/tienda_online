@@ -50,7 +50,7 @@
       <div class="modal-body">
         <div class="list-group pane-scroll">
           <div *ngFor="let prod of prodCompras" class="list-group-item list-group-item-action">
-            <img style="height: 50px; width: 50px" src="{{prod.urlimagen}}" class="rounded float-left mr-1" alt="">
+            <img style="height: 50px; width: 50px" src="{{prod.url}}" class="rounded float-left mr-1" alt="">
             <p style="margin-bottom: 0px"> {{prod.nombre}} </p>
             <p>Unidades: {{prod.numero}} </p>
             <p style="display: block"> subtotal: <span class="badge badge-danger">${{prod.numero*prod.precio}}</span></p>
@@ -84,7 +84,7 @@
         </button>
       </div>
       <div class="modal-body">
-          <img [src]="seleccionado.urlimagen" class="rounded mx-auto d-block" style="height: 250px; width: 250px">
+          <img [src]="seleccionado.url" class="rounded mx-auto d-block" style="height: 250px; width: 250px">
           <h3>{{seleccionado.nombre}}</h3>
           <h4>Precio: $<span class="badge badge-danger"> {{seleccionado.precio}} </span> </h4>
           <h4>Unidades disponibles:  {{seleccionado.unidades}}  </h4>
